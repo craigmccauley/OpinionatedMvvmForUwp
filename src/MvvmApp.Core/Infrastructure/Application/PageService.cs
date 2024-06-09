@@ -17,7 +17,8 @@ public class PageService(IPageFactory pageFactory) : IPageService
     {
         if (!pages.TryGetValue(page, out var pageViewModel))
         {
-            throw new Exception($"PageViewModel not found for page {page.PageType}");
+            throw new Exception($"PageViewModel \"{page.ViewModelType.Name}\" not found. " +
+                $"Check that you have created a factory for it and that the factory is being injected as a IPageViewModelFactory.");
         }
         return pageViewModel;
     }

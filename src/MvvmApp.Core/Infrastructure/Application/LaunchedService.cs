@@ -12,10 +12,11 @@ public interface ILaunchedService
    void OnLaunched(object sender, LaunchActivatedEventArgs e);
 }
 
-public class LaunchedService(
+public class LaunchedService<TMainPage>(
     IPageService pageService,
     IHooks hooks,
     INavigationFailedService navigationFailedService) : ILaunchedService
+    where TMainPage : Windows.UI.Xaml.Controls.Page
 {
     public void OnLaunched(object sender, LaunchActivatedEventArgs e)
     {
@@ -51,7 +52,7 @@ public class LaunchedService(
             var mainPageViewModel = pageService.GetPageViewModel(Pages.MainPage) as MainPageViewModel;
             mainPageViewModel.SelectedView = pageService.GetPageViewModel(Pages.NavPage);
             rootFrame.DataContext = mainPageViewModel;
-            rootFrame.Navigate(Pages.MainPage.PageType, e.Arguments);
+            rootFrame.Navigate(typeof(TMainPage), e.Arguments);
             Window.Current.Activate();
         }
     }

@@ -1,8 +1,9 @@
 ﻿<Page
-    x:Class="MvvmApp.Features.SettingsPage.SettingsPage"
+    x:Class="MvvmApp.Pages.FormPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MvvmApp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -12,6 +13,6 @@
         </TransitionCollection>
     </Page.Transitions>
     <Grid>
-        <TextBlock Text="Settings page"/>
+        <TextBlock Text="Form Page"/>
     </Grid>
 </Page>

@@ -11,12 +11,12 @@ namespace MvvmApp.Infrastructure.Application;
 
 public class ApplicationSetup
 {
-    public static IServiceProvider BuildServiceProvider()
+    public static IServiceProvider BuildServiceProvider<TMainPage>() where TMainPage : Windows.UI.Xaml.Controls.Page
     {
         var services = new ServiceCollection();
 
         services.AddSingleton<ISuspendingService, SuspendingService>();
-        services.AddSingleton<ILaunchedService, LaunchedService>();
+        services.AddSingleton<ILaunchedService, LaunchedService<TMainPage>>();
 
         services.AddSingleton<IPageService, PageService>();
         services.AddSingleton<IPageFactory, PageFactory>();

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MvvmApp.Features.NavPage.NavPage"
+    x:Class="MvvmApp.Pages.NavPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MvvmApp.Features.NavPage"
@@ -12,6 +12,7 @@
     xmlns:wp="using:MvvmApp.Features.WelcomePage"
     xmlns:fp="using:MvvmApp.Features.FormPage"
     xmlns:sp="using:MvvmApp.Features.SettingsPage"
+    xmlns:pages="using:MvvmApp.Pages"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:NavPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -21,13 +22,13 @@
             <nav:PageTemplateSelector x:Key="PageTemplateSelector">
                 <nav:PageTemplateSelector.DataTemplateCollection>
                     <DataTemplate nav:Element.DataType="wp:WelcomePageViewModel" x:DataType="wp:WelcomePageViewModel">
-                        <wp:WelcomePage/>
+                        <pages:WelcomePage/>
                     </DataTemplate>
                     <DataTemplate nav:Element.DataType="fp:FormPageViewModel" x:DataType="fp:FormPageViewModel">
-                        <fp:FormPage/>
+                        <pages:FormPage/>
                     </DataTemplate>
                     <DataTemplate nav:Element.DataType="sp:SettingsPageViewModel" x:DataType="sp:SettingsPageViewModel">
-                        <sp:SettingsPage/>
+                        <pages:SettingsPage/>
                     </DataTemplate>
                 </nav:PageTemplateSelector.DataTemplateCollection>
             </nav:PageTemplateSelector>
