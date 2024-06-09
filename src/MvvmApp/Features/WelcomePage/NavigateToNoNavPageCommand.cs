@@ -3,7 +3,7 @@ using MvvmApp.Infrastructure.Application;
 using MvvmApp.Infrastructure.Common;
 using System.Windows.Input;
 
-namespace MvvmApp.Features.NavPage;
+namespace MvvmApp.Features.WelcomePage;
 public interface INavigateToNoNavPageCommand : ICommand { }
 public class NavigateToNoNavPageCommand(IHooks hooks) : CommandBase, INavigateToNoNavPageCommand
 {

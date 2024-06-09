@@ -7,7 +7,9 @@ public static class DependencyInjection
     public static IServiceCollection AddFeaturesNavPage(this IServiceCollection services)
     {
         services.AddSingleton<IPageViewModelFactory, NavPageViewModelFactory>();
-        services.AddSingleton<INavigateToNoNavPageCommand, NavigateToNoNavPageCommand>();
+        services.AddSingleton<ILoadedCommand, LoadedCommand>();
+        services.AddSingleton<ISelectionChangedCommand, SelectionChangedCommand>();
+        services.AddSingleton<IMenuItemIsSelectedChangedService, MenuItemIsSelectedChangedService>();
         return services;
     }
 }

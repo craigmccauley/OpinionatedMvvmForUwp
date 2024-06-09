@@ -120,13 +120,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\FormPage\DependencyInjection.cs" />
+    <Compile Include="Features\FormPage\FormPage.xaml.cs">
+      <DependentUpon>FormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FormPage\FormPageViewModel.cs" />
+    <Compile Include="Features\FormPage\FormPageViewModelFactory.cs" />
     <Compile Include="Features\NavPage\DependencyInjection.cs" />
-    <Compile Include="Features\NavPage\NavigateToNoNavPageCommand.cs" />
+    <Compile Include="Features\NavPage\LoadedCommand.cs" />
+    <Compile Include="Features\NavPage\MenuItem.cs" />
+    <Compile Include="Features\NavPage\MenuItemIsSelectedChangedService.cs" />
+    <Compile Include="Features\WelcomePage\NavigateToNoNavPageCommand.cs" />
     <Compile Include="Features\NavPage\NavPage.xaml.cs">
       <DependentUpon>NavPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\NavPage\NavPageViewModel.cs" />
     <Compile Include="Features\NavPage\NavPageViewModelFactory.cs" />
+    <Compile Include="Features\NavPage\SelectionChangedCommand.cs" />
     <Compile Include="Features\NoNavPage\DependencyInjection.cs" />
     <Compile Include="Features\NoNavPage\NavigateToNavPageCommand.cs" />
     <Compile Include="Features\NoNavPage\NoNavPage.xaml.cs">
@@ -134,9 +144,22 @@
     </Compile>
     <Compile Include="Features\NoNavPage\NoNavPageViewModel.cs" />
     <Compile Include="Features\NoNavPage\NoNavPageViewModelFactory.cs" />
+    <Compile Include="Features\SettingsPage\DependencyInjection.cs" />
+    <Compile Include="Features\SettingsPage\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SettingsPage\SettingsPageViewModel.cs" />
+    <Compile Include="Features\SettingsPage\SettingsPageViewModelFactory.cs" />
+    <Compile Include="Features\WelcomePage\DependencyInjection.cs" />
+    <Compile Include="Features\WelcomePage\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\WelcomePage\WelcomePageViewModel.cs" />
+    <Compile Include="Features\WelcomePage\WelcomePageViewModelFactory.cs" />
     <Compile Include="Infrastructure\Common\CommandBase.cs" />
     <Compile Include="Infrastructure\Common\DictionaryExtensions.cs" />
     <Compile Include="Infrastructure\Common\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Infrastructure\Converters\SymbolToIconConverter.cs" />
     <Compile Include="Infrastructure\Navigation\Element.cs" />
     <Compile Include="Infrastructure\Navigation\PageTemplateSelector.cs" />
     <Compile Include="Infrastructure\Application\ApplicationSetup.cs" />
@@ -179,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Features\FormPage\FormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Features\MainPage\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +215,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Features\NoNavPage\NoNavPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\SettingsPage\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\WelcomePage\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

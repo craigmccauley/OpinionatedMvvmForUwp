@@ -7,17 +7,58 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:converters="using:MvvmApp.Infrastructure.Converters"
+    xmlns:nav="using:MvvmApp.Infrastructure.Navigation"
+    xmlns:wp="using:MvvmApp.Features.WelcomePage"
+    xmlns:fp="using:MvvmApp.Features.FormPage"
+    xmlns:sp="using:MvvmApp.Features.SettingsPage"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:NavPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-    <StackPanel>
-        <TextBlock Text="This page has a navigation panel and is being redered from MainPage."/>
-        <Button Content="Go to NoNav page">
-            <Interactivity:Interaction.Behaviors>
-                <Core:EventTriggerBehavior EventName="Click">
-                    <Core:InvokeCommandAction Command="{Binding NavigateToNoNavPageCommand}"/>
-                </Core:EventTriggerBehavior>
-            </Interactivity:Interaction.Behaviors>
-        </Button>
-    </StackPanel>
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding}"/>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:SymbolToIconConverter x:Key="SymbolToIconConverter"/>
+            <nav:PageTemplateSelector x:Key="PageTemplateSelector">
+                <nav:PageTemplateSelector.DataTemplateCollection>
+                    <DataTemplate nav:Element.DataType="wp:WelcomePageViewModel" x:DataType="wp:WelcomePageViewModel">
+                        <wp:WelcomePage/>
+                    </DataTemplate>
+                    <DataTemplate nav:Element.DataType="fp:FormPageViewModel" x:DataType="fp:FormPageViewModel">
+                        <fp:FormPage/>
+                    </DataTemplate>
+                    <DataTemplate nav:Element.DataType="sp:SettingsPageViewModel" x:DataType="sp:SettingsPageViewModel">
+                        <sp:SettingsPage/>
+                    </DataTemplate>
+                </nav:PageTemplateSelector.DataTemplateCollection>
+            </nav:PageTemplateSelector>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <NavigationView
+            MenuItemsSource="{Binding MenuItems}">
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior EventName="SelectionChanged">
+                <Core:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
+        <NavigationView.MenuItemTemplate>
+            <DataTemplate>
+                <NavigationViewItem
+                        Content="{Binding Content}"
+                        Icon="{Binding Glyph, Converter={StaticResource SymbolToIconConverter}}"
+                        IsSelected="{Binding IsSelected, Mode=TwoWay}"
+                        />
+            </DataTemplate>
+        </NavigationView.MenuItemTemplate>
+        <Frame 
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch" 
+                Content="{Binding SelectedView}" 
+                ContentTemplateSelector="{StaticResource PageTemplateSelector}"/>
+    </NavigationView>
 </Page>

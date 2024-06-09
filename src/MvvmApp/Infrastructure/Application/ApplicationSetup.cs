@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MvvmApp.Features.FormPage;
 using MvvmApp.Features.MainPage;
 using MvvmApp.Features.NavPage;
 using MvvmApp.Features.NoNavPage;
+using MvvmApp.Features.SettingsPage;
+using MvvmApp.Features.WelcomePage;
 using System;
 
 namespace MvvmApp.Infrastructure.Application;
@@ -21,9 +24,12 @@ public class ApplicationSetup
         services.AddSingleton<IHooks, Hooks>();
         services.AddSingleton<INavigationFailedService, NavigationFailedService>();
 
+        services.AddFeaturesFormPage();
         services.AddFeaturesMainPage();
         services.AddFeaturesNavPage();
         services.AddFeaturesNoNavPage();
+        services.AddFeaturesSettingsPage();
+        services.AddFeaturesWelcomePage();
 
         return services.BuildServiceProvider();
     }
