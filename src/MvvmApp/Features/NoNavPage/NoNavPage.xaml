@@ -9,7 +9,11 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
     <StackPanel>
         <TextBlock Text="This page has no navigation panel and is being redered from MainPage."/>
         <Button Content="Go back to nav page">

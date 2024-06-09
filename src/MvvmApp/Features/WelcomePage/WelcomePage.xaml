@@ -10,7 +10,11 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:WelcomePageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
     <StackPanel>
         <TextBlock Text="This welcome page is rendered from the NavPage NavigationView which in turn is rendered in the MainPage."/>
         <Button Content="Go to NoNav page">

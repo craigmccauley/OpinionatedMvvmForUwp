@@ -15,11 +15,6 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:NavPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Interactivity:Interaction.Behaviors>
-        <Core:EventTriggerBehavior EventName="Loaded">
-            <Core:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding}"/>
-        </Core:EventTriggerBehavior>
-    </Interactivity:Interaction.Behaviors>
     <Page.Resources>
         <ResourceDictionary>
             <converters:SymbolToIconConverter x:Key="SymbolToIconConverter"/>
@@ -39,6 +34,11 @@
         </ResourceDictionary>
     </Page.Resources>
 
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding}"/>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
     <NavigationView
             MenuItemsSource="{Binding MenuItems}">
         <Interactivity:Interaction.Behaviors>

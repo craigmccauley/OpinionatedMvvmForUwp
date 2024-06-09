@@ -11,7 +11,6 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainPageViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
         <Grid>
             <Grid.Resources>
