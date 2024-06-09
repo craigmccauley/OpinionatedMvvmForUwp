@@ -8,7 +8,9 @@ public class LoadedCommand() : CommandBase, ILoadedCommand
 {
     protected override void ExecuteCommand(object parameter)
     {
-        if(parameter is not NavPageViewModel vm)
+        if(parameter is not NavPageViewModel vm
+            || vm.MenuItems == null
+            || !vm.MenuItems.Any())
         {
             return;
         }

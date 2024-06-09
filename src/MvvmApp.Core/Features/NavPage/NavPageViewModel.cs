@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace MvvmApp.Features.NavPage;
 public class NavPageViewModel : NotifyPropertyChangedBase, IPageViewModel
 {
-    public ObservableCollection<MenuItem> MenuItems { get; init; }
+    public ObservableCollection<MenuItem> MenuItems { get; set; }
 
     public ISelectionChangedCommand SelectionChangedCommand { get; init; }
     public IPageViewModel SelectedView
