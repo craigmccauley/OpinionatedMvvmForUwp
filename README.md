@@ -57,32 +57,16 @@ Instead of using events we can instead bind to Commands on the ViewModel using `
 View Model arguably should have logic in them that strictly relates to the UI. I find in practice that domain logic seeps in. As well, even stick adheration to view only logic can lead to a bloated view model that is difficult to test.
 
 ```CSharp
-public class MainPageViewModel : INotifyPropertyChanged
+public partial class MainPageViewModel : ObservableObject
 {
 	public event PropertyChangedEventHandler PropertyChanged;
 
-	private string _someProperty;
-	public string SomeProperty
-	{
-		get => _someProperty;
-		set
-		{
-			_someProperty = value;
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SomeProperty)));
-		}
-	}
+	[ObservableProperty]
+	private string someProperty;
 
-	private Visibility _someUIElementVisibility;
-	public Visibility SomeUIElementVisibility
-	{
-		get => _someUIElementVisibility;
-		set
-		{
-			_someUIElementVisibility = value;
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SomeUIElementVisibility)));
-		}
-	}
-
+	[ObservableProperty]
+	private Visibility someUIElementVisibility;
+	
 	//Commands can sneak domain logic into the view model.
 	public ICommand SubmitCommand { get; private set;}
 
@@ -132,31 +116,13 @@ public class SubmitCommand(
 }
 
 // With all logic removed from the view model, it is now a simple class that only contains properties.
-public class MainPageViewModel : INotifyPropertyChanged
+public partial class MainPageViewModel : ObservableObjest
 {
-	public event PropertyChangedEventHandler PropertyChanged;
+	[ObservableProperty]
+	private string someProperty;
 
-	private string _someProperty;
-	public string SomeProperty
-	{
-		get => _someProperty;
-		set
-		{
-			_someProperty = value;
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SomeProperty)));
-		}
-	}
-
-	private Visibility _someUIElementVisibility;
-	public Visibility SomeUIElementVisibility
-	{
-		get => _someUIElementVisibility;
-		set
-		{
-			_someUIElementVisibility = value;
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SomeUIElementVisibility)));
-		}
-	}
+	[ObservableProperty]
+	private Visibility someUIElementVisibility;
 
 	public ICommand SubmitCommand { get; set; }
 }

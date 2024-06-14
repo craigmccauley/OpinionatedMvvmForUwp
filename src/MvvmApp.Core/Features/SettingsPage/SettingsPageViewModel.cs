@@ -1,6 +1,7 @@
-﻿using MvvmApp.Infrastructure.Common;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MvvmApp.Infrastructure.Common;
 
 namespace MvvmApp.Features.SettingsPage;
-public class SettingsPageViewModel : NotifyPropertyChangedBase, IPageViewModel
+public partial class SettingsPageViewModel : ObservableObject, IPageViewModel
 {
 }

@@ -1,11 +1,9 @@
-﻿using MvvmApp.Infrastructure.Common;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MvvmApp.Infrastructure.Common;
 
 namespace MvvmApp.Features.MainPage;
-public class MainPageViewModel : NotifyPropertyChangedBase, IPageViewModel
+public partial class MainPageViewModel : ObservableObject, IPageViewModel
 {
-    public IPageViewModel SelectedView
-    {
-        get => Get<IPageViewModel>();
-        set => Set(value);
-    }
+    [ObservableProperty]
+    private IPageViewModel selectedView;
 }

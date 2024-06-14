@@ -1,16 +1,13 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using MvvmApp.Infrastructure.Common;
 using System.Collections.ObjectModel;
 
 namespace MvvmApp.Features.NavPage;
-public class NavPageViewModel : NotifyPropertyChangedBase, IPageViewModel
+public partial class NavPageViewModel : ObservableObject, IPageViewModel
 {
     public ObservableCollection<MenuItem> MenuItems { get; set; }
-
     public ISelectionChangedCommand SelectionChangedCommand { get; init; }
-    public IPageViewModel SelectedView
-    {
-        get => Get<IPageViewModel>();
-        set => Set(value);
-    }
+    [ObservableProperty]
+    private IPageViewModel selectedView;
     public ILoadedCommand LoadedCommand { get; init; }
 }

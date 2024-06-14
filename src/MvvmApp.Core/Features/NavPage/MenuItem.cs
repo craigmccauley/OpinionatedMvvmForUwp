@@ -1,17 +1,13 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using MvvmApp.Infrastructure.Application;
-using MvvmApp.Infrastructure.Common;
 
 
 namespace MvvmApp.Features.NavPage
 {
-    public class MenuItem : NotifyPropertyChangedBase
+    public partial class MenuItem : ObservableObject
     {
-        public bool IsSelected
-        {
-            get => Get<bool>();
-            set => Set(value);
-        }
-
+        [ObservableProperty]
+        private bool isSelected;
         public Page NavDestination { get; init; }
         public string Content { get; init; }
         public Windows.UI.Xaml.Controls.Symbol Glyph { get; init; }
