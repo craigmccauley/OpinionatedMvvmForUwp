@@ -8,12 +8,11 @@ namespace MvvmApp.Infrastructure.Application;
 
 public interface ILaunchedService
 {
-
    void OnLaunched(object sender, LaunchActivatedEventArgs e);
 }
 
 public class LaunchedService<TMainPage>(
-    IPageService pageService,
+    IPageViewModelService pageViewModelService,
     IHooks hooks,
     INavigationFailedService navigationFailedService) : ILaunchedService
     where TMainPage : Windows.UI.Xaml.Controls.Page
@@ -42,15 +41,15 @@ public class LaunchedService<TMainPage>(
         {
             hooks.Initialize(
                 CoreWindow.GetForCurrentThread().Dispatcher,
-                pageService);
+                pageViewModelService);
 
             if (rootFrame.Content != null)
             {
                 return;
             }
 
-            var mainPageViewModel = pageService.GetPageViewModel(Pages.MainPage) as MainPageViewModel;
-            mainPageViewModel.SelectedView = pageService.GetPageViewModel(Pages.NavPage);
+            var mainPageViewModel = pageViewModelService.GetPageViewModel(Pages.MainPage) as MainPageViewModel;
+            mainPageViewModel.SelectedView = pageViewModelService.GetPageViewModel(Pages.NavPage);
             rootFrame.DataContext = mainPageViewModel;
             rootFrame.Navigate(typeof(TMainPage), e.Arguments);
             Window.Current.Activate();

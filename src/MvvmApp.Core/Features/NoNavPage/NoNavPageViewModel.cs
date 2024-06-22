@@ -1,4 +1,4 @@
-using MvvmApp.Infrastructure.Common;
+using MvvmApp.Infrastructure.ViewModel;
 
 namespace MvvmApp.Features.NoNavPage;
 public class NoNavPageViewModel : IPageViewModel

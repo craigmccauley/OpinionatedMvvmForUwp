@@ -5,20 +5,21 @@ using MvvmApp.Features.NoNavPage;
 using MvvmApp.Features.SettingsPage;
 using MvvmApp.Features.WelcomePage;
 using System;
+using System.Collections.Generic;
 
 namespace MvvmApp.Infrastructure.Application;
 
 public record Page(Type ViewModelType);
 public static class Pages
 {
-    public static Page MainPage = new(typeof(MainPageViewModel));
-    public static Page NoNavPage = new(typeof(NoNavPageViewModel));
-    public static Page NavPage = new(typeof(NavPageViewModel));
-    public static Page WelcomePage = new(typeof(WelcomePageViewModel));
-    public static Page FormPage = new(typeof(FormPageViewModel));
-    public static Page SettingsPage = new(typeof(SettingsPageViewModel));
+    public static readonly Page MainPage = new(typeof(MainPageViewModel));
+    public static readonly Page NoNavPage = new(typeof(NoNavPageViewModel));
+    public static readonly Page NavPage = new(typeof(NavPageViewModel));
+    public static readonly Page WelcomePage = new(typeof(WelcomePageViewModel));
+    public static readonly Page FormPage = new(typeof(FormPageViewModel));
+    public static readonly Page SettingsPage = new(typeof(SettingsPageViewModel));
 
-    public static Page[] All =
+    public static readonly IReadOnlyList<Page> All =
     [
         MainPage,
         NoNavPage,

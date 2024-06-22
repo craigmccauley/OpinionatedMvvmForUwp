@@ -1,17 +1,19 @@
 ﻿<Page
     x:Class="MvvmApp.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:vm="using:MvvmApp.Features.SettingsPage"
+    d:DataContext="{d:DesignInstance Type=vm:SettingsPageViewModel}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
-            <EntranceThemeTransition/>
+            <EntranceThemeTransition />
         </TransitionCollection>
     </Page.Transitions>
     <Grid>
-        <TextBlock Text="Settings page"/>
+        <TextBlock Text="Settings page" />
     </Grid>
 </Page>

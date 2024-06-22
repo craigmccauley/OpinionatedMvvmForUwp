@@ -1,6 +1,6 @@
 using MvvmApp.Features.MainPage;
 using MvvmApp.Infrastructure.Application;
-using MvvmApp.Infrastructure.Common;
+using MvvmApp.Infrastructure.ViewModel;
 using System.Windows.Input;
 
 namespace MvvmApp.Features.NoNavPage;

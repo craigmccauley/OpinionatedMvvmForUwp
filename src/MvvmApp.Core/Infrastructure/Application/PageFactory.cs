@@ -1,4 +1,5 @@
-﻿using MvvmApp.Infrastructure.Common;
+﻿using MvvmApp.Infrastructure.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +13,20 @@ public interface IPageFactory
 public class PageFactory(IEnumerable<IPageViewModelFactory> factories) : IPageFactory
 {
     private readonly List<IPageViewModelFactory> factoryList = factories.ToList();
-    public Dictionary<Page, IPageViewModel> CreateIndex() => Pages.All.ToDictionary(page => page, page =>
+    public Dictionary<Page, IPageViewModel> CreateIndex()
     {
-        var fac = factoryList.Single(f => f.ViewModelType == page.ViewModelType);
-        return fac.Invoke();
-    });
+        var missingFactories = Pages.All.Select(p => p.ViewModelType).Except(
+            factoryList.Select(f => f.ViewModelType)).ToList();
+
+        if (missingFactories.Any())
+        {
+            throw new Exception($"The following PageViewModels do not have a factory: {string.Join(", ", missingFactories)}" +
+                $"Check that you have created a factory for it and that the factory is being injected as a IPageViewModelFactory.");
+        }
+
+        return Pages.All.ToDictionary(
+            page => page,
+            page => factoryList.First(f => f.ViewModelType == page.ViewModelType).Invoke()
+        );
+    }
 }

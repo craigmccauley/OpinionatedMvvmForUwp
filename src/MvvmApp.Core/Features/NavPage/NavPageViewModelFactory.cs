@@ -1,5 +1,5 @@
 using MvvmApp.Infrastructure.Application;
-using MvvmApp.Infrastructure.Common;
+using MvvmApp.Infrastructure.ViewModel;
 using Windows.UI.Xaml.Controls;
 
 namespace MvvmApp.Features.NavPage;

@@ -1,15 +1,15 @@
-using MvvmApp.Infrastructure.Common;
+using MvvmApp.Infrastructure.ViewModel;
 using System;
 using System.Collections.Generic;
 
 namespace MvvmApp.Infrastructure.Application;
 
-public interface IPageService
+public interface IPageViewModelService
 {
     IPageViewModel GetPageViewModel(Page page);
 }
 
-public class PageService(IPageFactory pageFactory) : IPageService
+public class PageViewModelService(IPageFactory pageFactory) : IPageViewModelService
 {
     private readonly Dictionary<Page, IPageViewModel> pages = pageFactory.CreateIndex();
 

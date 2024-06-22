@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvvmApp.Infrastructure.Common;
+namespace MvvmApp.Infrastructure.ViewModel;
 public interface IPageViewModelFactory
 {
     Type ViewModelType { get; }

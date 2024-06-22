@@ -1,5 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using MvvmApp.Infrastructure.Common;
+using MvvmApp.Infrastructure.ViewModel;
 using System.Collections.ObjectModel;
 
 namespace MvvmApp.Features.NavPage;

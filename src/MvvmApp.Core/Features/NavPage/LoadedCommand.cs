@@ -1,4 +1,4 @@
-﻿using MvvmApp.Infrastructure.Common;
+﻿using MvvmApp.Infrastructure.ViewModel;
 using System.Linq;
 using System.Windows.Input;
 

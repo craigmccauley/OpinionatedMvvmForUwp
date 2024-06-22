@@ -18,7 +18,7 @@ public class ApplicationSetup
         services.AddSingleton<ISuspendingService, SuspendingService>();
         services.AddSingleton<ILaunchedService, LaunchedService<TMainPage>>();
 
-        services.AddSingleton<IPageService, PageService>();
+        services.AddSingleton<IPageViewModelService, PageViewModelService>();
         services.AddSingleton<IPageFactory, PageFactory>();
 
         services.AddSingleton<IHooks, Hooks>();

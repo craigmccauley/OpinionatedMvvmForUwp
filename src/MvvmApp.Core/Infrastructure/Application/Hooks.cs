@@ -1,4 +1,4 @@
-﻿using MvvmApp.Infrastructure.Common;
+﻿using MvvmApp.Infrastructure.ViewModel;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Core;
@@ -8,34 +8,40 @@ namespace MvvmApp.Infrastructure.Application;
 public interface IHooks
 {
     IPageViewModel GetPageViewModel(Page page);
-    void Initialize(CoreDispatcher coreDispatcher, IPageService pageService);
+    void Initialize(CoreDispatcher coreDispatcher, IPageViewModelService pageViewModelService);
     Task RunAsync(Action action);
 }
 
 public class Hooks : IHooks
 {
     private CoreDispatcher coreDispatcher;
-    private IPageService pageService;
+    private IPageViewModelService pageViewModelService;
     private bool isInitialized = false;
 
     public void Initialize(
         CoreDispatcher coreDispatcher,
-        IPageService pageService)
+        IPageViewModelService pageViewModelService)
     {
         this.coreDispatcher ??= coreDispatcher;
-        this.pageService ??= pageService;
+        this.pageViewModelService ??= pageViewModelService;
         isInitialized = true;
     }
 
     public async Task RunAsync(Action action)
     {
-        if(!isInitialized) throw new Exception("Dispatcher not initialized");
+        EnsureInitialized();
         await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
     }
-
     public IPageViewModel GetPageViewModel(Page page)
     {
-        if (!isInitialized) throw new Exception("Dispatcher not initialized");
-        return pageService.GetPageViewModel(page);
+        EnsureInitialized();
+        return pageViewModelService.GetPageViewModel(page);
+    }
+    private void EnsureInitialized()
+    {
+        if (!isInitialized)
+        {
+            throw new Exception("Dispatcher not initialized");
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvvmApp.Infrastructure.Common;
+namespace MvvmApp.Infrastructure.ViewModel;
 public abstract class PageViewModelFactoryBase<TPageViewModel>
     : IPageViewModelFactory<TPageViewModel> where TPageViewModel : IPageViewModel
 {
