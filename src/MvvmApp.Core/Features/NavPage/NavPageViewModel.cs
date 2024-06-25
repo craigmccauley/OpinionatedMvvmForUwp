@@ -6,8 +6,10 @@ namespace MvvmApp.Features.NavPage;
 public partial class NavPageViewModel : ObservableObject, IPageViewModel
 {
     public ObservableCollection<MenuItem> MenuItems { get; set; }
-    public ISelectionChangedCommand SelectionChangedCommand { get; init; }
+    public ISelectionChangedCommand SelectionChangedCommand { get; set; }
+    public ILoadedCommand LoadedCommand { get; set; }
     [ObservableProperty]
     private IPageViewModel selectedView;
-    public ILoadedCommand LoadedCommand { get; init; }
+    [ObservableProperty]
+    private MenuItem selectedItem;
 }

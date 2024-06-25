@@ -2,6 +2,11 @@
 using FluentAssertions;
 using MvvmApp.Core.Tests.TestHelpers;
 using MvvmApp.Features.NavPage;
+using MvvmApp.Infrastructure.Application;
+using MvvmApp.Infrastructure.ViewModel;
+using NSubstitute;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MvvmApp.Core.Tests.Features.NavPage
@@ -52,20 +57,35 @@ namespace MvvmApp.Core.Tests.Features.NavPage
 
         [Theory, AutoSubData]
         public void ExecuteCommand_WhenParameterIsNavPageViewModel_ShouldSetFirstItemIsSelectedToTrue(
+            [Frozen] IHooks hooks,
             [NoAutoProperties] MenuItem item1,
             [NoAutoProperties] MenuItem item2,
             [NoAutoProperties] NavPageViewModel vm,
+            IPageViewModel destinationViewModel,
             LoadedCommand sut)
         {
             //arrange
+            item1.NavDestination = Pages.All.PickRandom();
             vm.MenuItems = [item1, item2];
+
+            hooks.GetPageViewModel(item1.NavDestination).Returns(destinationViewModel);
+            hooks.RunOnUIThreadAsync(Arg.Any<Action>()).Returns(info =>
+            {
+                info.Arg<Action>()?.Invoke();
+                return Task.CompletedTask;
+            });
+
+            sut.ExecuteCompleted += ExecuteCompleted;
+
 
             //act
             sut.Execute(vm);
 
             //assert
-            item1.IsSelected.Should().Be(true);
-            item2.IsSelected.Should().Be(false);
+            void ExecuteCompleted(object sender, EventArgs e)
+            {
+                vm.SelectedView.Should().Be(destinationViewModel);
+            }
         }
     }
 }

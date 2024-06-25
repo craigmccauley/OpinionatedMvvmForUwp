@@ -6,11 +6,9 @@ namespace MvvmApp.Features.NavPage
 {
     public partial class MenuItem : ObservableObject
     {
-        [ObservableProperty]
-        private bool isSelected;
-        public Page NavDestination { get; init; }
-        public string Content { get; init; }
-        public Windows.UI.Xaml.Controls.Symbol Glyph { get; init; }
-        public NavPageViewModel Parent { get; init; }
+        public Page NavDestination { get; set; }
+        public string Content { get; set; }
+        public Windows.UI.Xaml.Controls.Symbol Glyph { get; set; }
+        public NavPageViewModel Parent { get; set; }
     }
 }

@@ -9,7 +9,6 @@ public static class DependencyInjection
         services.AddSingleton<IPageViewModelFactory, NavPageViewModelFactory>();
         services.AddSingleton<ILoadedCommand, LoadedCommand>();
         services.AddSingleton<ISelectionChangedCommand, SelectionChangedCommand>();
-        services.AddSingleton<IMenuItemIsSelectedChangedService, MenuItemIsSelectedChangedService>();
         return services;
     }
 }

@@ -5,27 +5,27 @@ using Windows.UI.Xaml.Controls;
 namespace MvvmApp.Features.NavPage;
 
 public class NavPageViewModelFactory(
-    ILoadedCommand loadedCommand,
     ISelectionChangedCommand selectionChangedCommand,
-    IMenuItemIsSelectedChangedService menuItemIsSelectedChangedService) : PageViewModelFactoryBase<NavPageViewModel>
+    ILoadedCommand loadedCommand) : PageViewModelFactoryBase<NavPageViewModel>
 {
     public override NavPageViewModel Invoke()
     {
         var vm = new NavPageViewModel
         {
             MenuItems = [],
-            LoadedCommand = loadedCommand,
             SelectionChangedCommand = selectionChangedCommand,
+            LoadedCommand = loadedCommand,
         };
-        vm.MenuItems.Add(new()
+
+        var firstItem = new MenuItem
         {
             Content = "Home",
             Glyph = Symbol.Home,
             NavDestination = Pages.WelcomePage,
-            IsSelected = true,
             Parent = vm,
-        });
+        };
 
+        vm.MenuItems.Add(firstItem);
         vm.MenuItems.Add(new()
         {
             Content = "Form",
@@ -34,10 +34,7 @@ public class NavPageViewModelFactory(
             Parent = vm,
         });
 
-        foreach(var item in vm.MenuItems)
-        {
-            item.PropertyChanged += menuItemIsSelectedChangedService.HandleIsSelectedChanged;
-        }
+        vm.SelectedItem = firstItem;
 
         return vm;
     }

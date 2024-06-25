@@ -40,7 +40,7 @@
             <Core:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding}" />
         </Core:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
-    <NavigationView MenuItemsSource="{Binding MenuItems}">
+    <NavigationView MenuItemsSource="{Binding MenuItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior EventName="SelectionChanged">
                 <Core:InvokeCommandAction Command="{Binding SelectionChangedCommand}" />
@@ -48,10 +48,7 @@
         </Interactivity:Interaction.Behaviors>
         <NavigationView.MenuItemTemplate>
             <DataTemplate>
-                <NavigationViewItem
-                    Content="{Binding Content}"
-                    Icon="{Binding Glyph, Converter={StaticResource SymbolToIconConverter}}"
-                    IsSelected="{Binding IsSelected, Mode=TwoWay}" />
+                <NavigationViewItem Content="{Binding Content}" Icon="{Binding Glyph, Converter={StaticResource SymbolToIconConverter}}" />
             </DataTemplate>
         </NavigationView.MenuItemTemplate>
         <Frame

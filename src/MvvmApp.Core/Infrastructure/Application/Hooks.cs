@@ -9,7 +9,7 @@ public interface IHooks
 {
     IPageViewModel GetPageViewModel(Page page);
     void Initialize(CoreDispatcher coreDispatcher, IPageViewModelService pageViewModelService);
-    Task RunAsync(Action action);
+    Task RunOnUIThreadAsync(Action action);
 }
 
 public class Hooks : IHooks
@@ -27,7 +27,7 @@ public class Hooks : IHooks
         isInitialized = true;
     }
 
-    public async Task RunAsync(Action action)
+    public async Task RunOnUIThreadAsync(Action action)
     {
         EnsureInitialized();
         await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());

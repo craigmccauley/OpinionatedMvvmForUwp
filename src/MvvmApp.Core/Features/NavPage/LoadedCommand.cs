@@ -1,19 +1,26 @@
-﻿using MvvmApp.Infrastructure.ViewModel;
+﻿using MvvmApp.Infrastructure.Application;
+using MvvmApp.Infrastructure.ViewModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MvvmApp.Features.NavPage;
 public interface ILoadedCommand : ICommand { }
-public class LoadedCommand() : CommandBase, ILoadedCommand
+public class LoadedCommand(
+    IHooks hooks) : CommandAsyncBase, ILoadedCommand
 {
-    protected override void ExecuteCommand(object parameter)
+    protected override async Task ExecuteAsync(object parameter)
     {
-        if(parameter is not NavPageViewModel vm
+        if (parameter is not NavPageViewModel vm
             || vm.MenuItems == null
             || !vm.MenuItems.Any())
         {
             return;
         }
-        vm.MenuItems.FirstOrDefault().IsSelected = true;
+
+        await hooks.RunOnUIThreadAsync(() =>
+        {
+            vm.SelectedView = hooks.GetPageViewModel(vm.MenuItems.FirstOrDefault().NavDestination);
+        });
     }
 }
